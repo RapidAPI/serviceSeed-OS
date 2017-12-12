@@ -1,31 +1,33 @@
 const webFramework = require("./webFramework/Interface")
-const cluster     = require('cluster');
-const numCPUs     = require('os').cpus().length;
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
+const exepetions = require("./utils/exeptions");
 
+module.exports.exepetions = exepetions;
 
 let seed = (exports = module.exports = { config: {} });
 
-seed.setConfig = ({ port, webFramework , }) => {
+seed.setConfig = ({ port, webFramework, }) => {
     seed.config.webFramework = webFramework;
     seed.config.port = port;
 }
 
-seed.init = () =>{
-    webFramework.init(seed.config);        
-    
+seed.init = () => {
+    webFramework.init(seed.config);
+
     const pingEndpoint = {
-        routeName:"/ping",
-        endpoint: () =>{ return { status: 200 , payload: "pong" }},
-        method : "get"
+        routeName: "/ping",
+        endpoint: () => { return { status: 200, payload: "pong" } },
+        method: "get"
     };
-    
+
     seed.routes([pingEndpoint]);
 
-    if(seed.config.enableClusters ){
+    if (seed.config.enableClusters) {
         seed.enableClusters();
     }
 
-    if(seed.config.enableSwagger){
+    if (seed.config.enableSwagger) {
         seed.enableSwagger()
     }
 }
