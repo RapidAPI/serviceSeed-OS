@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "seed project for ne services creation",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/RapidAPI/serviceSeed-OS.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
