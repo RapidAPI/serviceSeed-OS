@@ -26,7 +26,7 @@ module.exports.endpointWraperMiddleware = (logic) => (
         const midlleWareResponse = await endpoint(logic)(req)
         if (midlleWareResponse.status > 299 || midlleWareResponse.status < 200) {
             return res.status(midlleWareResponse.status).send(
-                { errors: midlleWareResponse.errors, took }
+                { errors: midlleWareResponse.errors, took: midlleWareResponse.took }
             );
         }
         return res.status(midlleWareResponse.status).send(midlleWareResponse);
